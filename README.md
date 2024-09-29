@@ -1,2 +1,1 @@
-# wild-backend-calculator
-Wild Backend Calculator application
+# Wild Backend Calculator application
