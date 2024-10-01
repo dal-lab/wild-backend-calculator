@@ -23,6 +23,8 @@ public class RequestHandler implements HttpHandler {
 
         try (OutputStream outputStream = exchange.getResponseBody()) {
             outputStream.write(bytes);
+        } catch (IOException e) {
+            throw e;
         }
     }
 
