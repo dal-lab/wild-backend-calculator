@@ -1,6 +1,6 @@
 # Wild Backend Calculator application
 
-### 과제 개요
+## 과제 개요
 이 프로젝트는 `Layered Architecture`를 기반으로 한 간단한 사칙연산 계산기 API를 개발하는 과제입니다.  
 주어진 두 숫자와 사칙연산 기호(`operations`)를 기반으로 연산을 수행하며, 연산 결과를 반환하는 기능을 제공합니다.  
 또한, 사칙연산 기록을 조회하는 API도 포함되어 있습니다.
