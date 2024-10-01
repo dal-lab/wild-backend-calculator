@@ -23,15 +23,16 @@ public class RequestHandler implements HttpHandler {
         URI uri = exchange.getRequestURI();
         String path = uri.getPath();
 
-        requestContent = getRequestContent(requestContent, method, path);
+        requestContent = setRequestMethodAndPath(requestContent, method, path);
 
         return requestContent;
     }
 
-    private String getRequestContent(String requestContent, String method, String path) {
+    private String setRequestMethodAndPath(String requestContent, String method, String path) {
         if (method.equals("POST") && path.equals("/calculations")) {
             requestContent = "success";
-        } else if (method.equals("GET") && path.equals("/calculations")) {
+        }
+        if (method.equals("GET") && path.equals("/calculations")) {
             requestContent = "success";
         }
 
