@@ -12,20 +12,15 @@ public class RequestHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        String method = exchange.getRequestMethod();
-        URI uri = exchange.getRequestURI();
-        String path = uri.getPath();
-        String key = method + " " + path;
-        System.out.println("key: " + key);
+
+        String key = getRequestKey(exchange);
         String response ="";
 
         if(key.equals("GET /")) {
             response = "Hello World\n";
         } else if(key.equals("POST /calculations")) {
-            InputStream inputStream = exchange.getRequestBody();
-            String requestBody = new String(inputStream.readAllBytes());
+            String requestBody = getRequestContent(exchange);
             String[] splitedRequestBody = requestBody.split(" ");
-            System.out.println("requestBody: " + requestBody);
             int number1 = Integer.parseInt(splitedRequestBody[0]);
             int number2 = Integer.parseInt(splitedRequestBody[2]);
             String operation = splitedRequestBody[1];
@@ -47,10 +42,22 @@ public class RequestHandler implements HttpHandler {
             }
         }
         response += "\n";
-        exchange.sendResponseHeaders(200, response.length());
+        sendResponseContent(exchange, response);
+    }
+    public String getRequestKey(HttpExchange exchange){
+        String method = exchange.getRequestMethod();
+        URI uri = exchange.getRequestURI();
+        String path = uri.getPath();
+        return method + " " + path;
+    }
+    private String getRequestContent(HttpExchange exchange) throws IOException {
+        InputStream inputStream = exchange.getRequestBody();
+        return new String(inputStream.readAllBytes());
+    }
+    private void sendResponseContent(HttpExchange exchange, String responseContent) throws IOException {
+        exchange.sendResponseHeaders(200, responseContent.length());
         try (OutputStream outputStream = exchange.getResponseBody()) {
-            outputStream.write(response.getBytes());
+            outputStream.write(responseContent.getBytes());
         }
-
     }
 }
