@@ -7,53 +7,48 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RequestHandler implements HttpHandler {
+    private final Map<String, ResourceMethodHandler> methodHandlers = new HashMap<>();
+
+    public RequestHandler() {
+        methodHandlers.put(HomeGetResource.KEY, new HomeGetResource());
+        methodHandlers.put(CalculationCreateResource.KEY, new CalculationCreateResource());
+
+    }
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 
-        String key = getRequestKey(exchange);
-        String response ="";
-
-        if(key.equals("GET /")) {
-            response = "Hello World\n";
-        } else if(key.equals("POST /calculations")) {
-            String requestBody = getRequestContent(exchange);
-            String[] splitedRequestBody = requestBody.split(" ");
-            int number1 = Integer.parseInt(splitedRequestBody[0]);
-            int number2 = Integer.parseInt(splitedRequestBody[2]);
-            String operation = splitedRequestBody[1];
-
-            if(operation.equals("+")) {
-                response = String.valueOf(number1 + number2);
-            }
-            else if(operation.equals("-")) {
-                response = String.valueOf(number1 - number2);
-            }
-            else if(operation.equals("*")) {
-                response = String.valueOf(number1 * number2);
-            }
-            else if(operation.equals("/")) {
-                response = String.valueOf(number1 / number2);
-            }
-            else {
-                response = "Error";
-            }
+        String requestKey = getRequestKey(exchange);
+        if (!methodHandlers.containsKey(requestKey)) {
+            System.out.println("methodHandlers에 " + requestKey + "가 없습니다.");
+            exchange.sendResponseHeaders(404, -1);
+            return;
         }
-        response += "\n";
-        sendResponseContent(exchange, response);
+
+        ResourceMethodHandler methodHandler = methodHandlers.get(requestKey);
+
+        String requestContent = getRequestContent(exchange);
+        String responseContent = methodHandler.handle(requestContent);
+
+        sendResponseContent(exchange, responseContent);
     }
-    public String getRequestKey(HttpExchange exchange){
+
+    public String getRequestKey(HttpExchange exchange) {
         String method = exchange.getRequestMethod();
         URI uri = exchange.getRequestURI();
         String path = uri.getPath();
         return method + " " + path;
     }
+
     private String getRequestContent(HttpExchange exchange) throws IOException {
         InputStream inputStream = exchange.getRequestBody();
         return new String(inputStream.readAllBytes());
     }
+
     private void sendResponseContent(HttpExchange exchange, String responseContent) throws IOException {
         exchange.sendResponseHeaders(200, responseContent.length());
         try (OutputStream outputStream = exchange.getResponseBody()) {
