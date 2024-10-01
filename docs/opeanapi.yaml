@@ -25,6 +25,7 @@ paths:
                                 operations:
                                     type: string
                                     description: 사칙연산("+", "-", "*", "/")
+                                    enum: ["+", "-", "*", "/"]
                                     example: "+"
             responses:
                 200:
