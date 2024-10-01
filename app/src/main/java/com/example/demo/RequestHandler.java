@@ -13,12 +13,12 @@ public class RequestHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         String requestContent = getRequestContent(exchange);
 
-        requestContent = getRequestKey(exchange, requestContent);
+        requestContent = processRequest(exchange, requestContent);
 
         sendResponse(exchange, requestContent);
     }
 
-    private String getRequestKey(HttpExchange exchange, String requestContent) {
+    private String processRequest(HttpExchange exchange, String requestContent) {
         String method = exchange.getRequestMethod();
         URI uri = exchange.getRequestURI();
         String path = uri.getPath();
@@ -46,6 +46,7 @@ public class RequestHandler implements HttpHandler {
         try (OutputStream outputStream = exchange.getResponseBody()) {
             outputStream.write(bytes);
         } catch (IOException e) {
+            System.err.println("응답 전송 중 오류 발생: " + e.getMessage());
             throw e;
         }
     }
