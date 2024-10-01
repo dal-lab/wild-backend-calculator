@@ -29,6 +29,9 @@ public class RequestHandler implements HttpHandler {
     }
 
     private String setRequestMethodAndPath(String requestContent, String method, String path) {
+        if (method.equals("GET") && path.equals("/")) {
+            requestContent = "hello world";
+        }
         if (method.equals("POST") && path.equals("/calculations")) {
             requestContent = "success";
         }
