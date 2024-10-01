@@ -17,6 +17,7 @@ public class App {
     public void run() throws IOException {
         InetSocketAddress address = new InetSocketAddress(HOST, PORT);
         HttpServer httpServer = HttpServer.create(address, 0);
+        httpServer.createContext("/", new RequestHandler());
         httpServer.start();
 
         System.out.println("Listening on http://" + HOST + ":" + PORT);
