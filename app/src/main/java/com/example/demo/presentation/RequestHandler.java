@@ -1,5 +1,6 @@
 package com.example.demo.presentation;
 
+import com.example.demo.exception.ResponseWriteException;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -8,7 +9,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 
-public class RequestHandler implements HttpHandler {
+public final class RequestHandler implements HttpHandler {
+    int HTTP_OK = 200;
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -57,13 +59,14 @@ public class RequestHandler implements HttpHandler {
             throws IOException {
         byte[] bytes = responseContent.getBytes();
 
-        exchange.sendResponseHeaders(200, bytes.length);
+        exchange.sendResponseHeaders(HTTP_OK, bytes.length);
 
-        try (OutputStream outputStream = exchange.getResponseBody()) {
+        try {
+            OutputStream outputStream = exchange.getResponseBody();
             outputStream.write(bytes);
         } catch (IOException e) {
-            System.err.println("응답 전송 중 오류 발생: " + e.getMessage());
-            throw e;
+            String message = e.getMessage();
+            throw new ResponseWriteException(message);
         }
     }
 
