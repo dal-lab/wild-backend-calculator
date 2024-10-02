@@ -20,7 +20,7 @@ public class Calculator {
         operators.put("/", new OperatorDivide());
     }
 
-    public int calculate(int number1, int number2,
+    public Calculation calculate(int number1, int number2,
             String operatorSymbol) {
         validateOperator(operatorSymbol);
 
@@ -29,7 +29,7 @@ public class Calculator {
         Calculation calculation = saveCalculation(number1, number2,
                 operatorSymbol, result);
 
-        return calculation.getResult();
+        return calculation;
     }
 
     private Calculation saveCalculation(int number1, int number2,

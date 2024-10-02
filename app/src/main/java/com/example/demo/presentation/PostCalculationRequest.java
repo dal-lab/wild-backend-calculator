@@ -1,6 +1,7 @@
 package com.example.demo.presentation;
 
 import com.example.demo.application.Calculator;
+import com.example.demo.infrastructure.Calculation;
 import com.example.demo.presentation.dto.CalculationRequestDto;
 import com.example.demo.presentation.dto.CalculationResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,14 +20,14 @@ public class PostCalculationRequest implements RequestMethodHandler {
                 CalculationRequestDto.class
         );
 
-        int calculate = calculator.calculate(
+        Calculation calculate = calculator.calculate(
                 calculationRequestDto.getNumber1(),
                 calculationRequestDto.getNumber2(),
                 calculationRequestDto.getOperator());
 
         return objectMapper.writeValueAsString(
                 new CalculationResponseDto(
-                        calculate
+                        calculate.getResult()
                 )
         );
     }
