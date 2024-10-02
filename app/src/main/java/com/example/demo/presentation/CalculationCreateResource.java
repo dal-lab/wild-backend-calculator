@@ -19,9 +19,7 @@ public class CalculationCreateResource extends ResourceMethodHandler {
             responseContent = String.valueOf(number1 * number2);
         } else if (operation.equals("/")) {
             responseContent = String.valueOf(number1 / number2);
-        } else {
-            responseContent = "Error";
         }
-        return responseContent;
+        return "Error";
     }
 }
