@@ -6,8 +6,17 @@ import java.util.List;
 public class CalculationRepository {
 
     private final List<Calculation> calculations = new ArrayList<>();
+    private static CalculationRepository instance = null;
 
     public CalculationRepository() {
+    }
+
+
+    public static CalculationRepository getInstance() {
+        if(instance == null) {
+            instance = new CalculationRepository();
+        }
+        return instance;
     }
 
     public void add(Calculation calculation) {
@@ -15,7 +24,6 @@ public class CalculationRepository {
     }
 
     public List<Calculation> findAll() {
-        System.out.println(calculations);
         return new ArrayList<>(calculations);
     }
 }

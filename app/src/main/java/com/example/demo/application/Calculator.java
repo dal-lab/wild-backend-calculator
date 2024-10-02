@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Calculator {
 
-    private CalculationRepository calculationRepository = new CalculationRepository();
+    private CalculationRepository calculationRepository = CalculationRepository.getInstance();
 
     private final Map<String, Operator> operators = new HashMap<>();
 
