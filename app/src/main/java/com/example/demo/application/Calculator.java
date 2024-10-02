@@ -43,9 +43,6 @@ public class Calculator {
             String operatorSymbol) {
         Operator operator = operators.get(operatorSymbol);
 
-        if (operator instanceof OperatorDivide && number2 == 0) {
-            throw new CalculatorArithmeticException("나누기는 0으로 나눌 수 없습니다.");
-        }
         int result = operator.calculate(number1, number2);
         return result;
     }
