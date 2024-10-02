@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class App {
+
     private static final String HOST = "localhost";
     private static final int PORT = 8080;
 
