@@ -35,11 +35,16 @@ public class RequestHandler implements HttpHandler {
         if (method.equals("GET") && path.equals("/")) {
             return "hello world";
         }
+
         if (method.equals("POST") && path.equals("/calculations")) {
-            return "success";
+            String[] values = requestContent.split(" ");
+            int number1 = Integer.parseInt(values[0]);
+            int number2 = Integer.parseInt(values[2]);
+            return String.valueOf(number1 + number2);
         }
+
         if (method.equals("GET") && path.equals("/calculations")) {
-            return "success";
+            return requestContent;
         }
 
         return "Not Fount Exception";
