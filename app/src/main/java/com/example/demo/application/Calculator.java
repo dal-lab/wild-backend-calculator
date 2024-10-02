@@ -24,10 +24,15 @@ public class Calculator {
             String operatorSymbol) {
         validateOperator(operatorSymbol);
 
-        int result = performCalculation(number1, number2, operatorSymbol);
+        Operator operator = operators.get(operatorSymbol);
 
-        Calculation calculation = saveCalculation(number1, number2,
-                operatorSymbol, result);
+        int result = operator.calculate(number1, number2);
+
+        Calculation calculation = new Calculation(number1, number2,
+                operatorSymbol,
+                result);
+
+        calculationRepository.add(calculation);
 
         return calculation;
     }
@@ -37,24 +42,6 @@ public class Calculator {
             throw new IllegalArgumentException(
                     "Invalid operator: " + operatorSymbol);
         }
-    }
-
-    private int performCalculation(int number1, int number2,
-            String operatorSymbol) {
-        Operator operator = operators.get(operatorSymbol);
-
-        int result = operator.calculate(number1, number2);
-        return result;
-    }
-
-    private Calculation saveCalculation(int number1, int number2,
-            String operatorSymbol, int result) {
-        Calculation calculation = new Calculation(number1, number2,
-                operatorSymbol,
-                result);
-
-        calculationRepository.add(calculation);
-        return calculation;
     }
 
     public List<Calculation> getCalculationList() {
