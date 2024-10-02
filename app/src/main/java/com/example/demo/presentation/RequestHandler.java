@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.presentation;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -30,16 +30,16 @@ public class RequestHandler implements HttpHandler {
 
     private String setRequestMethodAndPath(String requestContent, String method, String path) {
         if (method.equals("GET") && path.equals("/")) {
-            requestContent = "hello world";
+            return "hello world";
         }
         if (method.equals("POST") && path.equals("/calculations")) {
-            requestContent = "success";
+            return "success";
         }
         if (method.equals("GET") && path.equals("/calculations")) {
-            requestContent = "success";
+            return "success";
         }
 
-        return requestContent;
+        return "Not Fount Exception";
     }
 
     private void sendResponse(HttpExchange exchange, String responseContent) throws IOException {
