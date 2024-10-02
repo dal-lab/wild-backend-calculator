@@ -1,5 +1,10 @@
 package com.example.demo.presentation;
 
+import com.example.demo.application.OperatorMinus;
+import com.example.demo.application.OperatorMultiply;
+import com.example.demo.application.OperatorPlus;
+import com.example.demo.application.OperatorDivide;
+
 public class PostCalculationRequest implements RequestMethodHandler {
 
     @Override
@@ -11,16 +16,17 @@ public class PostCalculationRequest implements RequestMethodHandler {
 
         switch (operator) {
             case "+":
-                return String.valueOf(number1 + number2);
+                return OperatorPlus.calculate(number1, number2);
             case "-":
-                return String.valueOf(number1 - number2);
+                return OperatorMinus.calculate(number1, number2);
             case "*":
-                return String.valueOf(number1 * number2);
+                return OperatorMultiply.calculate(number1, number2);
             case "/":
-                return String.valueOf(number1 / number2);
+                return OperatorDivide.calculate(number1, number2);
             default:
                 throw new IllegalArgumentException(
-                        "지원하지 않는 연산자입니다: " + operator);
+                        "지원하지 않는 연산자입니다: " + operator
+                );
         }
     }
 }
