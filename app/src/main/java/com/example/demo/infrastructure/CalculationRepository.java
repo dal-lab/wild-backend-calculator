@@ -13,4 +13,8 @@ public class CalculationRepository {
     public void add(Calculation calculation) {
         calculations.add(calculation);
     }
+
+    public List<Calculation> findAll() {
+        return new ArrayList<>(calculations);
+    }
 }

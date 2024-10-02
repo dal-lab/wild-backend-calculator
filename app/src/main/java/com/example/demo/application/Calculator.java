@@ -4,9 +4,11 @@ import com.example.demo.exception.CalculatorArithmeticException;
 import com.example.demo.infrastructure.Calculation;
 import com.example.demo.infrastructure.CalculationRepository;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Calculator {
+
     private CalculationRepository calculationRepository = new CalculationRepository();
 
     private final Map<String, Operator> operators = new HashMap<>();
@@ -18,7 +20,8 @@ public class Calculator {
         operators.put("/", new OperatorDivide());
     }
 
-    public Calculation calculate(int number1, int number2, String operatorSymbol) {
+    public Calculation calculate(int number1, int number2,
+            String operatorSymbol) {
         if (operatorSymbol == null || !operators.containsKey(operatorSymbol)) {
             throw new IllegalArgumentException(
                     "Invalid operator: " + operatorSymbol);
@@ -38,5 +41,9 @@ public class Calculator {
         calculationRepository.add(calculation);
 
         return calculation;
+    }
+
+    public List<Calculation> getCalculationList() {
+        return calculationRepository.findAll();
     }
 }
