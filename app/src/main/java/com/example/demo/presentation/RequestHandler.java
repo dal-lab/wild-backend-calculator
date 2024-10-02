@@ -9,16 +9,18 @@ import java.io.OutputStream;
 import java.net.URI;
 
 public class RequestHandler implements HttpHandler {
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String requestContent = getRequestContent(exchange);
 
-        requestContent = processRequest(exchange, requestContent);
+        String processRequest = getProcessRequest(exchange, requestContent);
 
-        sendResponse(exchange, requestContent);
+        sendResponse(exchange, processRequest);
     }
 
-    private String processRequest(HttpExchange exchange, String requestContent) {
+    private String getProcessRequest(HttpExchange exchange,
+            String requestContent) {
         String method = exchange.getRequestMethod();
         URI uri = exchange.getRequestURI();
         String path = uri.getPath();
@@ -28,7 +30,8 @@ public class RequestHandler implements HttpHandler {
         return requestContent;
     }
 
-    private String setRequestMethodAndPath(String requestContent, String method, String path) {
+    private String setRequestMethodAndPath(String requestContent, String method,
+            String path) {
         if (method.equals("GET") && path.equals("/")) {
             return "hello world";
         }
@@ -42,7 +45,8 @@ public class RequestHandler implements HttpHandler {
         return "Not Fount Exception";
     }
 
-    private void sendResponse(HttpExchange exchange, String responseContent) throws IOException {
+    private void sendResponse(HttpExchange exchange, String responseContent)
+            throws IOException {
         byte[] bytes = responseContent.getBytes();
 
         exchange.sendResponseHeaders(200, bytes.length);
