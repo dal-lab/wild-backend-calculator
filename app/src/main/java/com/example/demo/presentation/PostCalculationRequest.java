@@ -12,7 +12,8 @@ public class PostCalculationRequest implements RequestMethodHandler {
         int number2 = Integer.parseInt(values[2]);
 
         Calculator calculator = new Calculator();
+        int calculate = calculator.calculate(number1, number2, operator);
 
-        return calculator.calculate(number1, number2, operator);
+        return String.valueOf(calculate);
     }
 }

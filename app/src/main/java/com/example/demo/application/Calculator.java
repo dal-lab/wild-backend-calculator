@@ -2,7 +2,7 @@ package com.example.demo.application;
 
 public class Calculator {
 
-    public String calculate(int number1, int number2, String operator) {
+    public int calculate(int number1, int number2, String operator) {
         switch (operator) {
             case "+":
                 return OperatorPlus.calculate(number1, number2);
