@@ -51,7 +51,7 @@ public class RequestHandler implements HttpHandler {
             return requestContent;
         }
 
-        return "Not Fount Exception";
+        return "Not Found Exception";
     }
 
     private void sendResponse(HttpExchange exchange, String responseContent)
