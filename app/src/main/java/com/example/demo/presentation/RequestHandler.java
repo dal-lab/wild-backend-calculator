@@ -30,7 +30,9 @@ public class RequestHandler implements HttpHandler {
         return requestContent;
     }
 
-    private String setRequestMethodAndPath(String requestContent, String method,
+    private String setRequestMethodAndPath(
+            String requestContent,
+            String method,
             String path) {
         if (method.equals("GET") && path.equals("/")) {
             return "hello world";
