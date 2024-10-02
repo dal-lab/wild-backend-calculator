@@ -27,28 +27,24 @@ public final class RequestHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         String requestContent = getRequestContent(exchange);
 
-        String responseContent = processRequest(exchange, requestContent);
+        String requestKey = getRequestKey(exchange);
+        String responseContent = getRequestHandler(requestContent,
+                requestKey);
 
         sendResponse(exchange, responseContent);
     }
 
-    private String processRequest(HttpExchange exchange,
-            String requestContent) {
+    private String getRequestKey(HttpExchange exchange) {
         String method = exchange.getRequestMethod();
         URI uri = exchange.getRequestURI();
         String path = uri.getPath();
 
-        String responseContent = determineResponseContent(requestContent,
-                method, path);
-
-        return responseContent;
+        return method + " " + path;
     }
 
-    private String determineResponseContent(
+    private String getRequestHandler(
             String requestContent,
-            String method,
-            String path) {
-        String requestKey = method + " " + path;
+            String requestKey) {
 
         RequestMethodHandler requestMethodHandler = handlers.get(requestKey);
         if (requestMethodHandler != null) {
