@@ -1,5 +1,6 @@
 package com.example.demo.application;
 
+import com.example.demo.exception.CalculatorArithmeticException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class Calculator {
         Operator operator = operators.get(operatorSymbol);
 
         if (operator instanceof OperatorDivide && number2 == 0) {
-            throw new ArithmeticException("나누기는 0으로 나눌 수 없습니다.");
+            throw new CalculatorArithmeticException("나누기는 0으로 나눌 수 없습니다.");
         }
 
         return operator.calculate(number1, number2);
