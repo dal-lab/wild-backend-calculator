@@ -1,19 +1,37 @@
 package com.example.demo.presentation;
 
 import com.example.demo.application.Calculator;
+import com.example.demo.infrastructure.Calculation;
+import com.example.demo.presentation.dto.CalculationRequestDto;
+import com.example.demo.presentation.dto.CalculationResponseDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 
 public class PostCalculationRequest implements RequestMethodHandler {
 
+    private final Calculator calculator = new Calculator();
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @Override
-    public String handler(String content) {
-        String[] values = content.split(" ");
-        String operator = String.valueOf(values[1]);
-        int number1 = Integer.parseInt(values[0]);
-        int number2 = Integer.parseInt(values[2]);
+    public String handler(String content) throws IOException {
+        CalculationRequestDto calculationRequestDto = objectMapper.readValue(
+                content,
+                CalculationRequestDto.class
+        );
 
-        Calculator calculator = new Calculator();
-        int calculate = calculator.calculate(number1, number2, operator);
+        Calculation calculate = calculator.calculate(
+                calculationRequestDto.getNumber1(),
+                calculationRequestDto.getNumber2(),
+                calculationRequestDto.getOperator());
 
-        return String.valueOf(calculate);
+        return objectMapper.writeValueAsString(
+                new CalculationResponseDto(
+                        calculate.getNumber1(),
+                        calculate.getNumber2(),
+                        calculate.getOperation(),
+                        calculate.getResult()
+                )
+        );
     }
 }

@@ -44,7 +44,7 @@ public final class RequestHandler implements HttpHandler {
 
     private String getRequestHandler(
             String requestContent,
-            String requestKey) {
+            String requestKey) throws IOException {
 
         RequestMethodHandler requestMethodHandler = handlers.get(requestKey);
         if (requestMethodHandler != null) {

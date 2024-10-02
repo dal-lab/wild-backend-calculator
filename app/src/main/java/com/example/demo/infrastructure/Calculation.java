@@ -5,10 +5,10 @@ public class Calculation {
     private int number1;
     private int number2;
     private String operation;
-    private String result;
+    private int result;
 
     public Calculation(int number1, int number2, String operation,
-            String result) {
+            int result) {
         this.number1 = number1;
         this.number2 = number2;
         this.operation = operation;
@@ -27,7 +27,7 @@ public class Calculation {
         return operation;
     }
 
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 }
