@@ -1,5 +1,6 @@
 package com.example.demo.presentation;
 
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.ResponseWriteException;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -10,6 +11,7 @@ import java.io.OutputStream;
 import java.net.URI;
 
 public final class RequestHandler implements HttpHandler {
+
     int HTTP_OK = 200;
 
     @Override
@@ -52,7 +54,7 @@ public final class RequestHandler implements HttpHandler {
             return listCalculationRequest.handler(requestContent);
         }
 
-        return "Not Found Exception";
+        throw new NotFoundException("요청한 리소스를 찾을 수 없습니다.");
     }
 
     private void sendResponse(HttpExchange exchange, String responseContent)
