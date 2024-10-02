@@ -1,7 +1,6 @@
 package com.example.demo.presentation;
 
 import com.example.demo.application.Calculator;
-import com.example.demo.infrastructure.Calculation;
 import com.example.demo.presentation.dto.CalculationRequestDto;
 import com.example.demo.presentation.dto.CalculationResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;

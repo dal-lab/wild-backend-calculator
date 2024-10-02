@@ -1,33 +1,30 @@
 package com.example.demo.presentation.dto;
 
+import com.example.demo.infrastructure.Calculation;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class CalculationListResponseDto {
 
-    private final int number1;
-    private final int number2;
-    private final String operator;
-    private final int result;
+    List<CalculationListRequestDto> calculations;
 
-    public CalculationListResponseDto(int number1, int number2, String operator,
-            int result) {
-        this.number1 = number1;
-        this.number2 = number2;
-        this.operator = operator;
-        this.result = result;
+    public CalculationListResponseDto(
+            List<CalculationListRequestDto> calculations) {
+        this.calculations = calculations;
     }
 
-    public int getNumber1() {
-        return number1;
-    }
-
-    public int getNumber2() {
-        return number2;
-    }
-
-    public String getOperator() {
-        return operator;
-    }
-
-    public int getResult() {
-        return result;
+    public static CalculationListResponseDto of(List<Calculation> calculations) {
+        return new CalculationListResponseDto(
+                calculations.stream()
+                        .map(calculation -> {
+                                    return new CalculationListRequestDto(
+                                            calculation.getNumber1(),
+                                            calculation.getNumber2(),
+                                            calculation.getOperation(),
+                                            calculation.getResult()
+                                    );
+                                }
+                        ).collect(Collectors.toList())
+        );
     }
 }
