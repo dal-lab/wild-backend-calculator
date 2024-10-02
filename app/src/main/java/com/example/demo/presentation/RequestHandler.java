@@ -14,12 +14,12 @@ public class RequestHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         String requestContent = getRequestContent(exchange);
 
-        String processRequest = getProcessRequest(exchange, requestContent);
+        String responseContent = processRequest(exchange, requestContent);
 
-        sendResponse(exchange, processRequest);
+        sendResponse(exchange, responseContent);
     }
 
-    private String getProcessRequest(HttpExchange exchange,
+    private String processRequest(HttpExchange exchange,
             String requestContent) {
         String method = exchange.getRequestMethod();
         URI uri = exchange.getRequestURI();
@@ -40,6 +40,7 @@ public class RequestHandler implements HttpHandler {
             String[] values = requestContent.split(" ");
             int number1 = Integer.parseInt(values[0]);
             int number2 = Integer.parseInt(values[2]);
+
             return String.valueOf(number1 + number2);
         }
 
