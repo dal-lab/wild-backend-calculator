@@ -46,7 +46,8 @@ public class RequestHandler implements HttpHandler {
         }
 
         if (method.equals("GET") && path.equals("/calculations")) {
-            return requestContent;
+            ListCalculationRequest listCalculationRequest = new ListCalculationRequest();
+            return listCalculationRequest.handler(requestContent);
         }
 
         return "Not Found Exception";
