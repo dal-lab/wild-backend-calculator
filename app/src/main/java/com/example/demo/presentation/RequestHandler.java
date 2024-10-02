@@ -25,12 +25,13 @@ public class RequestHandler implements HttpHandler {
         URI uri = exchange.getRequestURI();
         String path = uri.getPath();
 
-        requestContent = setRequestMethodAndPath(requestContent, method, path);
+        String responseContent = determineResponseContent(requestContent,
+                method, path);
 
-        return requestContent;
+        return responseContent;
     }
 
-    private String setRequestMethodAndPath(
+    private String determineResponseContent(
             String requestContent,
             String method,
             String path) {
