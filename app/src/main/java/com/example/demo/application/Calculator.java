@@ -32,14 +32,11 @@ public class Calculator {
         return calculation;
     }
 
-    private Calculation saveCalculation(int number1, int number2,
-            String operatorSymbol, int result) {
-        Calculation calculation = new Calculation(number1, number2,
-                operatorSymbol,
-                result);
-
-        calculationRepository.add(calculation);
-        return calculation;
+    private void validateOperator(String operatorSymbol) {
+        if (operatorSymbol == null || !operators.containsKey(operatorSymbol)) {
+            throw new IllegalArgumentException(
+                    "Invalid operator: " + operatorSymbol);
+        }
     }
 
     private int performCalculation(int number1, int number2,
@@ -53,11 +50,14 @@ public class Calculator {
         return result;
     }
 
-    private void validateOperator(String operatorSymbol) {
-        if (operatorSymbol == null || !operators.containsKey(operatorSymbol)) {
-            throw new IllegalArgumentException(
-                    "Invalid operator: " + operatorSymbol);
-        }
+    private Calculation saveCalculation(int number1, int number2,
+            String operatorSymbol, int result) {
+        Calculation calculation = new Calculation(number1, number2,
+                operatorSymbol,
+                result);
+
+        calculationRepository.add(calculation);
+        return calculation;
     }
 
     public List<Calculation> getCalculationList() {
