@@ -1,8 +1,9 @@
 package com.example.demo.application;
 
-public class OperatorPlus {
+public class OperatorPlus implements Operator {
 
-    public static int calculate(Integer number1, Integer number2) {
+    @Override
+    public int calculate(int number1, int number2) {
         return number1 + number2;
     }
 }

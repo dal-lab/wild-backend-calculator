@@ -1,21 +1,21 @@
 package com.example.demo.application;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Calculator {
 
-    public int calculate(int number1, int number2, String operator) {
-        switch (operator) {
-            case "+":
-                return OperatorPlus.calculate(number1, number2);
-            case "-":
-                return OperatorMinus.calculate(number1, number2);
-            case "*":
-                return OperatorMultiply.calculate(number1, number2);
-            case "/":
-                return OperatorDivide.calculate(number1, number2);
-            default:
-                throw new IllegalArgumentException(
-                        "지원하지 않는 연산자입니다: " + operator
-                );
-        }
+    private final Map<String, Operator> operators = new HashMap<>();
+
+    public Calculator() {
+        operators.put("+", new OperatorPlus());
+        operators.put("-", new OperatorMinus());
+        operators.put("*", new OperatorMultiply());
+        operators.put("/", new OperatorDivide());
+    }
+
+    public int calculate(int number1, int number2, String operatorSymbol) {
+        Operator operator = operators.get(operatorSymbol);
+        return operator.calculate(number1, number2);
     }
 }
