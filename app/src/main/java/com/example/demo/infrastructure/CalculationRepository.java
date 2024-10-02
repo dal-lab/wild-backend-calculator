@@ -15,6 +15,7 @@ public class CalculationRepository {
     }
 
     public List<Calculation> findAll() {
+        System.out.println(calculations);
         return new ArrayList<>(calculations);
     }
 }

@@ -20,7 +20,7 @@ public class Calculator {
         operators.put("/", new OperatorDivide());
     }
 
-    public Calculation calculate(int number1, int number2,
+    public int calculate(int number1, int number2,
             String operatorSymbol) {
         if (operatorSymbol == null || !operators.containsKey(operatorSymbol)) {
             throw new IllegalArgumentException(
@@ -40,7 +40,7 @@ public class Calculator {
 
         calculationRepository.add(calculation);
 
-        return calculation;
+        return calculation.getResult();
     }
 
     public List<Calculation> getCalculationList() {

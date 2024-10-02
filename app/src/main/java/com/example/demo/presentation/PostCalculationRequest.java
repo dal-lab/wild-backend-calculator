@@ -20,17 +20,14 @@ public class PostCalculationRequest implements RequestMethodHandler {
                 CalculationRequestDto.class
         );
 
-        Calculation calculate = calculator.calculate(
+        int calculate = calculator.calculate(
                 calculationRequestDto.getNumber1(),
                 calculationRequestDto.getNumber2(),
                 calculationRequestDto.getOperator());
 
         return objectMapper.writeValueAsString(
                 new CalculationResponseDto(
-                        calculate.getNumber1(),
-                        calculate.getNumber2(),
-                        calculate.getOperation(),
-                        calculate.getResult()
+                        calculate
                 )
         );
     }
