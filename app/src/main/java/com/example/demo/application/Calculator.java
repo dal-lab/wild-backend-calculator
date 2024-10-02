@@ -22,25 +22,42 @@ public class Calculator {
 
     public int calculate(int number1, int number2,
             String operatorSymbol) {
-        if (operatorSymbol == null || !operators.containsKey(operatorSymbol)) {
-            throw new IllegalArgumentException(
-                    "Invalid operator: " + operatorSymbol);
-        }
+        validateOperator(operatorSymbol);
 
+        int result = performCalculation(number1, number2, operatorSymbol);
+
+        Calculation calculation = saveCalculation(number1, number2,
+                operatorSymbol, result);
+
+        return calculation.getResult();
+    }
+
+    private Calculation saveCalculation(int number1, int number2,
+            String operatorSymbol, int result) {
+        Calculation calculation = new Calculation(number1, number2,
+                operatorSymbol,
+                result);
+
+        calculationRepository.add(calculation);
+        return calculation;
+    }
+
+    private int performCalculation(int number1, int number2,
+            String operatorSymbol) {
         Operator operator = operators.get(operatorSymbol);
 
         if (operator instanceof OperatorDivide && number2 == 0) {
             throw new CalculatorArithmeticException("나누기는 0으로 나눌 수 없습니다.");
         }
         int result = operator.calculate(number1, number2);
+        return result;
+    }
 
-        Calculation calculation = new Calculation(number1, number2,
-                operatorSymbol,
-                result);
-
-        calculationRepository.add(calculation);
-
-        return calculation.getResult();
+    private void validateOperator(String operatorSymbol) {
+        if (operatorSymbol == null || !operators.containsKey(operatorSymbol)) {
+            throw new IllegalArgumentException(
+                    "Invalid operator: " + operatorSymbol);
+        }
     }
 
     public List<Calculation> getCalculationList() {
