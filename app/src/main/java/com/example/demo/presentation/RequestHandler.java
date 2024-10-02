@@ -9,10 +9,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class RequestHandler implements HttpHandler {
 
+    private final Map<String, RequestMethodHandler> handlers = new HashMap<>();
     int HTTP_OK = 200;
+
+    public RequestHandler() {
+        handlers.put("GET /", new GetHomeRequest());
+        handlers.put("POST /calculations", new PostCalculationRequest());
+        handlers.put("GET /calculations", new ListCalculationRequest());
+    }
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -39,19 +48,11 @@ public final class RequestHandler implements HttpHandler {
             String requestContent,
             String method,
             String path) {
-        if (method.equals("GET") && path.equals("/")) {
-            GetHomeRequest getHomeRequest = new GetHomeRequest();
-            return getHomeRequest.handler(requestContent);
-        }
+        String requestKey = method + " " + path;
 
-        if (method.equals("POST") && path.equals("/calculations")) {
-            PostCalculationRequest postCalculationRequest = new PostCalculationRequest();
-            return postCalculationRequest.handler(requestContent);
-        }
-
-        if (method.equals("GET") && path.equals("/calculations")) {
-            ListCalculationRequest listCalculationRequest = new ListCalculationRequest();
-            return listCalculationRequest.handler(requestContent);
+        RequestMethodHandler requestMethodHandler = handlers.get(requestKey);
+        if (requestMethodHandler != null) {
+            return requestMethodHandler.handler(requestContent);
         }
 
         throw new NotFoundException("요청한 리소스를 찾을 수 없습니다.");
