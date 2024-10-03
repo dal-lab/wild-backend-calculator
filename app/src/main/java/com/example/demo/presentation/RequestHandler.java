@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class RequestHandler implements HttpHandler {
         String requestContent = getRequestContent(exchange);
         String responseContent = methodHandler.handle(requestContent);
 
-        sendResponseContent(exchange, responseContent);
+        sendResponseContent(exchange, 200, "application/json", responseContent);
     }
 
     public String getRequestKey(HttpExchange exchange) {
@@ -49,10 +50,13 @@ public class RequestHandler implements HttpHandler {
         return new String(inputStream.readAllBytes());
     }
 
-    private void sendResponseContent(HttpExchange exchange, String responseContent) throws IOException {
-        exchange.sendResponseHeaders(200, responseContent.length());
+    private void sendResponseContent(HttpExchange exchange, int statusCode, String contentType, String responseContent) throws IOException {
+        byte[] responseBytes = responseContent.getBytes(StandardCharsets.UTF_8);
+        exchange.getResponseHeaders().set("Content-Type", contentType);
+        exchange.sendResponseHeaders(statusCode, responseBytes.length);
         try (OutputStream outputStream = exchange.getResponseBody()) {
-            outputStream.write(responseContent.getBytes());
+            outputStream.write(responseBytes);
         }
+
     }
 }
