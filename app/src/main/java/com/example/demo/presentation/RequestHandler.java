@@ -15,9 +15,13 @@ public final class RequestHandler implements HttpHandler {
     int HTTP_OK = 200;
 
     public RequestHandler() {
-        handlers.put("GET /", new GetHomeRequest());
-        handlers.put("POST /calculations", new PostCalculationRequest());
-        handlers.put("GET /calculations", new ListCalculationRequest());
+        String KEY = "GET /";
+        String KEY1 = "POST /calculations";
+        String KEY2 = "GET /calculations";
+
+        handlers.put(KEY, new GetHomeRequest());
+        handlers.put(KEY1, new PostCalculationRequest());
+        handlers.put(KEY2, new ListCalculationRequest());
     }
 
     @Override
