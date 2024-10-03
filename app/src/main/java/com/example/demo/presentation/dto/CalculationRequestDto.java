@@ -1,6 +1,7 @@
 package com.example.demo.presentation.dto;
 
 import java.util.Arrays;
+import java.util.Set;
 
 /**
  * 계산 요청을 위한 DTO
@@ -14,8 +15,10 @@ public record CalculationRequestDto(
         int number2,
         String operator
 ) {
+    private static final Set<String> VALID_OPERATORS = Set.of("+", "-", "*", "/");
+
     public CalculationRequestDto {
-        if (!Arrays.asList("+", "-", "*", "/").contains(operator)) {
+        if (!VALID_OPERATORS.contains(operator)) {
             throw new IllegalArgumentException("Invalid operator. Must be one of +, -, *, /");
         }
     }
