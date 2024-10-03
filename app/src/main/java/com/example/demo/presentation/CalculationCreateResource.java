@@ -2,7 +2,6 @@ package com.example.demo.presentation;
 
 
 import com.example.demo.application.Calculator;
-import com.example.demo.application.OperatorKind;
 import com.example.demo.infrastructure.Calculation;
 import com.example.demo.presentation.dto.CalculationRequestDto;
 import com.example.demo.presentation.dto.CalculationResponseDto;
@@ -17,8 +16,7 @@ public class CalculationCreateResource extends ResourceMethodHandler {
     public String handle(String content) throws JsonProcessingException {
         try {
             CalculationRequestDto requestDto = objectMapper.readValue(content, CalculationRequestDto.class);
-            OperatorKind operator = OperatorKind.fromSymbol(requestDto.getOperator());
-            Calculation result = calculator.calculate(requestDto.getNumber1(), requestDto.getNumber2(), operator);
+            Calculation result = calculator.calculate(requestDto.getNumber1(), requestDto.getNumber2(), requestDto.getOperator());
             return objectMapper.writeValueAsString(
                     new CalculationResponseDto<>(
                             requestDto.getNumber1(),
@@ -27,10 +25,10 @@ public class CalculationCreateResource extends ResourceMethodHandler {
                             result.getResult()
                     )
             );
-        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
-            e.printStackTrace();
-
-            return "Error: Invalid input\n";
+        } catch (IllegalArgumentException e) {
+            return "잘못된 입력입니다: " + e.getMessage();
+        } catch (ArithmeticException e) {
+            return "계산 오류: " + e.getMessage();
         }
     }
 }

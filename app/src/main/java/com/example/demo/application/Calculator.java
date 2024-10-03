@@ -5,25 +5,26 @@ import com.example.demo.infrastructure.CalculationRepository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Calculator {
-    private final HashMap<OperatorKind, Operator> operators = new HashMap<>();
+    private final Map<String, Operator> operators = new HashMap<>();
     //    private final Map<String,Operator> operators = new HashMap<>();
     private final CalculationRepository calculationRepository = CalculationRepository.getInstance();
 
     public Calculator() {
-        operators.put(OperatorKind.PLUS, new OperatorPlus());
-        operators.put(OperatorKind.DIVIDE, new OperatorDivide());
-        operators.put(OperatorKind.MINUS, new OperatorMinus());
-        operators.put(OperatorKind.MULTIPLY, new OperatorMultiply());
+        operators.put("+", new OperatorPlus());
+        operators.put("/", new OperatorDivide());
+        operators.put("-", new OperatorMinus());
+        operators.put("*", new OperatorMultiply());
     }
 
     public Calculation calculate(
-            int number1, int number2, OperatorKind operator) {
+            int number1, int number2, String operator) {
         Operator op = operators.get(operator);
         int result = op.calculate(number1, number2);
 
-        Calculation calculation = new Calculation(number1, number2, operator.getSymbol(), result);
+        Calculation calculation = new Calculation(number1, number2, operator, result);
         calculationRepository.add(calculation);
 
         return calculation;
