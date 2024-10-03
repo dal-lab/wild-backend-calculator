@@ -44,11 +44,11 @@ public final class RequestHandler implements HttpHandler {
             String requestKey) throws IOException {
 
         RequestMethodHandler requestMethodHandler = handlers.get(requestKey);
-        if (requestMethodHandler != null) {
-            return requestMethodHandler.handler(requestContent);
+        if (requestMethodHandler == null) {
+            throw new NotFoundException("요청한 리소스를 찾을 수 없습니다.");
         }
 
-        throw new NotFoundException("요청한 리소스를 찾을 수 없습니다.");
+        return requestMethodHandler.handler(requestContent);
     }
 
     private void sendResponse(HttpExchange exchange, String responseContent)
