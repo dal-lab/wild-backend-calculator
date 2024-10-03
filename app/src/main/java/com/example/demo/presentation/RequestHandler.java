@@ -1,10 +1,8 @@
 package com.example.demo.presentation;
 
 import com.example.demo.exception.NotFoundException;
-import com.example.demo.exception.ResponseWriteException;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -60,13 +58,8 @@ public final class RequestHandler implements HttpHandler {
 
         exchange.sendResponseHeaders(HTTP_OK, bytes.length);
 
-        try {
-            OutputStream outputStream = exchange.getResponseBody();
-            outputStream.write(bytes);
-        } catch (IOException e) {
-            String message = e.getMessage();
-            throw new ResponseWriteException(message);
-        }
+        OutputStream outputStream = exchange.getResponseBody();
+        outputStream.write(bytes);
     }
 
     private String getRequestContent(HttpExchange exchange) throws IOException {

@@ -17,10 +17,8 @@ public class ListCalculationRequest implements RequestMethodHandler {
     public String handler(String content) throws IOException {
         List<Calculation> calculationList = calculator.getCalculationList();
 
-        String jsonResponse = objectMapper.writeValueAsString(
+        return objectMapper.writeValueAsString(
                 CalculationListResponseDto.of(calculationList)
         );
-
-        return jsonResponse;
     }
 }
