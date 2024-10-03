@@ -23,21 +23,32 @@ public class RequestHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        try {
+            String requestKey = getRequestKey(exchange);
+            if (!methodHandlers.containsKey(requestKey)) {
+                System.out.println("methodHandlers에 " + requestKey + "가 없습니다.");
+                sendErrorResponse(exchange, 404, "Not Found");
+                return;
+            }
 
-        String requestKey = getRequestKey(exchange);
-        if (!methodHandlers.containsKey(requestKey)) {
-            System.out.println("methodHandlers에 " + requestKey + "가 없습니다.");
-            exchange.sendResponseHeaders(404, -1);
-            return;
+
+            ResourceMethodHandler methodHandler = methodHandlers.get(requestKey);
+
+            String requestContent = getRequestContent(exchange);
+            String responseContent = methodHandler.handle(requestContent);
+
+            sendResponseContent(exchange, 200, "application/json", responseContent);
+        } catch (Exception e) {
+            sendErrorResponse(exchange, 500, e.getMessage());
         }
 
-        ResourceMethodHandler methodHandler = methodHandlers.get(requestKey);
-
-        String requestContent = getRequestContent(exchange);
-        String responseContent = methodHandler.handle(requestContent);
-
-        sendResponseContent(exchange, 200, "application/json", responseContent);
     }
+
+    private void sendErrorResponse(HttpExchange exchange, int statusCode, String message) throws IOException {
+        String responseContent = String.format("{\"error\": \"%s\"}", message);
+        sendResponseContent(exchange, statusCode, "application/json", responseContent);
+    }
+
 
     public String getRequestKey(HttpExchange exchange) {
         String method = exchange.getRequestMethod();
