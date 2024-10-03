@@ -31,6 +31,6 @@ public class Calculator {
     }
 
     public List<Calculation> getCalculations() {
-        return calculationRepository.getCalculations();
+        return List.copyOf(calculationRepository.getCalculations());
     }
 }
