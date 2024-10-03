@@ -43,7 +43,17 @@ public class RequestHandler implements HttpHandler {
         String method = exchange.getRequestMethod();
         URI uri = exchange.getRequestURI();
         String path = uri.getPath();
-        return method + " " + path;
+        String query = uri.getQuery();
+
+        StringBuilder keyBuilder = new StringBuilder(method)
+                .append(" ")
+                .append(path);
+
+        if (query != null && !query.isEmpty()) {
+            keyBuilder.append("?").append(query);
+        }
+
+        return keyBuilder.toString();
     }
 
     private String getRequestContent(HttpExchange exchange) throws IOException {
