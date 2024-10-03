@@ -1,6 +1,5 @@
 package com.example.demo.application;
 
-import com.example.demo.exception.CalculatorArithmeticException;
 import com.example.demo.infrastructure.Calculation;
 import com.example.demo.infrastructure.CalculationRepository;
 import java.util.HashMap;

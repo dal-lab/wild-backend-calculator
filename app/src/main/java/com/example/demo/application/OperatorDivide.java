@@ -6,7 +6,7 @@ public class OperatorDivide implements Operator {
 
     @Override
     public int calculate(int number1, int number2) {
-        if (number2 == 0) {
+        if (number1 == 0 && number2 == 0) {
             throw new CalculatorArithmeticException("나누기는 0으로 나눌 수 없습니다.");
         }
 
