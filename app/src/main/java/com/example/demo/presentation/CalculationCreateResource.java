@@ -16,12 +16,12 @@ public class CalculationCreateResource extends ResourceMethodHandler {
     public String handle(String content) throws JsonProcessingException {
         try {
             CalculationRequestDto requestDto = objectMapper.readValue(content, CalculationRequestDto.class);
-            Calculation result = calculator.calculate(requestDto.getNumber1(), requestDto.getNumber2(), requestDto.getOperator());
+            Calculation result = calculator.calculate(requestDto.number1(), requestDto.number2(), requestDto.operator());
             return objectMapper.writeValueAsString(
                     new CalculationResponseDto<>(
-                            requestDto.getNumber1(),
-                            requestDto.getNumber2(),
-                            requestDto.getOperator(),
+                            requestDto.number1(),
+                            requestDto.number2(),
+                            requestDto.operator(),
                             result.getResult()
                     )
             );
