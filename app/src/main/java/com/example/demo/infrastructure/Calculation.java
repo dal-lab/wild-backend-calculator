@@ -36,4 +36,14 @@ public class Calculation {
             int result) {
         return new Calculation(number1, number2, operation, result);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "number1=" + number1 +
+                ", number2=" + number2 +
+                ", operation='" + operation + '\'' +
+                ", result=" + result +
+                '}';
+    }
 }

@@ -1,18 +1,12 @@
 package com.example.demo.presentation.dto;
 
-import static java.util.stream.Collectors.toList;
-
 import com.example.demo.infrastructure.Calculation;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class CalculationListResponseDto {
-
-    List<CalculationListItemResponseDto> calculations;
-
-    public CalculationListResponseDto(
-            List<CalculationListItemResponseDto> calculations) {
-        this.calculations = calculations;
-    }
+public record CalculationListResponseDto(
+        List<CalculationListItemResponseDto> calculations
+) {
 
     public static CalculationListResponseDto of(
             List<Calculation> calculations) {
@@ -24,7 +18,7 @@ public class CalculationListResponseDto {
                                         calculation.getOperation(),
                                         calculation.getResult()
                                 )
-                        ).collect(toList())
+                        ).collect(Collectors.toList())
         );
     }
 }
