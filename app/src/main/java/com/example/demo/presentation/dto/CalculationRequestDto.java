@@ -19,16 +19,4 @@ public record CalculationRequestDto(
             throw new IllegalArgumentException("Invalid operator. Must be one of +, -, *, /");
         }
     }
-
-    public int getNumber2() {
-        return number2;
-    }
-
-    public int getNumber1() {
-        return number1;
-    }
-
-    public String getOperator() {
-        return operator;
-    }
 }
