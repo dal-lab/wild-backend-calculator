@@ -3,6 +3,7 @@ package com.example.demo.presentation;
 
 import com.example.demo.application.Calculator;
 import com.example.demo.application.OperatorKind;
+import com.example.demo.infrastructure.Calculation;
 import com.example.demo.presentation.dto.CalculationRequestDto;
 import com.example.demo.presentation.dto.CalculationResponseDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,13 +18,13 @@ public class CalculationCreateResource extends ResourceMethodHandler {
         try {
             CalculationRequestDto requestDto = objectMapper.readValue(content, CalculationRequestDto.class);
             OperatorKind operator = OperatorKind.fromSymbol(requestDto.getOperator());
-            int result = calculator.calculate(requestDto.getNumber1(), requestDto.getNumber2(), operator);
+            Calculation result = calculator.calculate(requestDto.getNumber1(), requestDto.getNumber2(), operator);
             return objectMapper.writeValueAsString(
                     new CalculationResponseDto<>(
                             requestDto.getNumber1(),
                             requestDto.getNumber2(),
                             requestDto.getOperator(),
-                            result
+                            result.getResult()
                     )
             );
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {

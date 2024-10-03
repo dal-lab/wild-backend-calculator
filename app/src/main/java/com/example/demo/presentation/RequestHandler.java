@@ -16,6 +16,7 @@ public class RequestHandler implements HttpHandler {
     public RequestHandler() {
         methodHandlers.put(HomeGetResource.KEY, new HomeGetResource());
         methodHandlers.put(CalculationCreateResource.KEY, new CalculationCreateResource());
+        methodHandlers.put(CalculationListResource.KEY, new CalculationListResource());
 
     }
 
