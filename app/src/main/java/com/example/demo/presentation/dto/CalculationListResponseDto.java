@@ -1,8 +1,9 @@
 package com.example.demo.presentation.dto;
 
+import static java.util.stream.Collectors.toList;
+
 import com.example.demo.infrastructure.Calculation;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CalculationListResponseDto {
 
@@ -23,11 +24,7 @@ public class CalculationListResponseDto {
                                         calculation.getOperation(),
                                         calculation.getResult()
                                 )
-                        ).collect(Collectors.toList()) // 변경된 부분
+                        ).collect(toList())
         );
-    }
-
-    public List<CalculationListItemResponseDto> getCalculations() {
-        return calculations;
     }
 }
