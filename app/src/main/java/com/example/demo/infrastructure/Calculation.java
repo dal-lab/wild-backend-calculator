@@ -30,4 +30,10 @@ public class Calculation {
     public int getResult() {
         return result;
     }
+
+    public static Calculation createCalculation(int number1, int number2,
+            String operation,
+            int result) {
+        return new Calculation(number1, number2, operation, result);
+    }
 }

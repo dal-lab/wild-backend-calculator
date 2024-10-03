@@ -27,9 +27,8 @@ public class Calculator {
 
         int result = operator.calculate(number1, number2);
 
-        Calculation calculation = new Calculation(number1, number2,
-                operatorSymbol,
-                result);
+        Calculation calculation = Calculation.createCalculation(number1,
+                number2, operatorSymbol, result);
 
         calculationRepository.add(calculation);
 
