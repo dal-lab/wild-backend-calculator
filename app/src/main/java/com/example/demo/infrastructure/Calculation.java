@@ -30,14 +30,4 @@ public class Calculation {
     public int getResult() {
         return result;
     }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "number1=" + number1 +
-                ", number2=" + number2 +
-                ", operation='" + operation + '\'' +
-                ", result=" + result +
-                '}';
-    }
 }
