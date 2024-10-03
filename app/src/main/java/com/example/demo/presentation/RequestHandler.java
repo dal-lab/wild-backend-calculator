@@ -3,6 +3,7 @@ package com.example.demo.presentation;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -46,8 +47,20 @@ public class RequestHandler implements HttpHandler {
     }
 
     private String getRequestContent(HttpExchange exchange) throws IOException {
+        final int MAX_BODY_SIZE = 1024 * 1024; // 1MB 제한
         InputStream inputStream = exchange.getRequestBody();
-        return new String(inputStream.readAllBytes());
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int length;
+        int totalBytes = 0;
+        while ((length = inputStream.read(buffer)) != -1) {
+            totalBytes += length;
+            if (totalBytes > MAX_BODY_SIZE) {
+                throw new IOException("요청 본문이 너무 큽니다");
+            }
+            result.write(buffer, 0, length);
+        }
+        return result.toString("UTF-8");
     }
 
     private void sendResponseContent(HttpExchange exchange, int statusCode, String contentType, String responseContent) throws IOException {
