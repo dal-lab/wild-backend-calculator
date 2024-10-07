@@ -9,6 +9,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springframework:spring-core:6.1.13")
+    implementation("org.springframework:spring-context:6.1.13")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0")
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
