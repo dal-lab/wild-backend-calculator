@@ -12,11 +12,13 @@ import org.springframework.stereotype.Component;
 public class CalculationResourceCreateHandler extends ResourceMethodHandler {
 
     private final Calculator calculator;
+    private final ObjectMapper objectMapper;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
-    public CalculationResourceCreateHandler(Calculator calculator) {
+    public CalculationResourceCreateHandler(
+            Calculator calculator, ObjectMapper objectMapper
+    ) {
         this.calculator = calculator;
+        this.objectMapper = objectMapper;
     }
 
     @Override

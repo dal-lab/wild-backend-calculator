@@ -14,10 +14,13 @@ public class CalculationResourceListHandler extends ResourceMethodHandler {
 
     private final Calculator calculator;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
-    public CalculationResourceListHandler(Calculator calculator) {
+    public CalculationResourceListHandler(
+            Calculator calculator, ObjectMapper objectMapper
+    ) {
         this.calculator = calculator;
+        this.objectMapper = objectMapper;
     }
 
     @Override
