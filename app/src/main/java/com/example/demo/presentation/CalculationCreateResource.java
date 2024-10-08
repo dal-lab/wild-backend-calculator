@@ -6,7 +6,9 @@ import com.example.demo.presentation.dto.CalculationRequestDto;
 import com.example.demo.presentation.dto.CalculationResponseDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CalculationCreateResource extends ResourceMethodHandler {
 
     private final Calculator calculator = new Calculator();

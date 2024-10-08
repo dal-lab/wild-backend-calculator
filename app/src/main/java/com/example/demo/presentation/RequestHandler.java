@@ -20,9 +20,13 @@ public class RequestHandler implements HttpHandler {
             CalculationCreateResource calculationCreateResource,
             CalculationListResource calculationListResource
     ) {
-        handlers.put(homeGetResource.key(), new HomeGetResource());
-        handlers.put(calculationCreateResource.key(), new CalculationCreateResource());
-        handlers.put(calculationListResource.key(), new CalculationListResource());
+        addResourceMethodHandler(homeGetResource);
+        addResourceMethodHandler(calculationCreateResource);
+        addResourceMethodHandler(calculationListResource);
+    }
+
+    private void addResourceMethodHandler(ResourceMethodHandler handler) {
+        handlers.put(handler.key(), handler);
     }
 
     @Override

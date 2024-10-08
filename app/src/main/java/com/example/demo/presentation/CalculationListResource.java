@@ -3,13 +3,13 @@ package com.example.demo.presentation;
 import com.example.demo.application.Calculator;
 import com.example.demo.infrastructure.Calculation;
 import com.example.demo.presentation.dto.CalculationListResponseDto;
-import com.example.demo.presentation.dto.CalculationRequestDto;
-import com.example.demo.presentation.dto.CalculationResponseDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class CalculationListResource extends ResourceMethodHandler {
 
     private final Calculator calculator = new Calculator();
