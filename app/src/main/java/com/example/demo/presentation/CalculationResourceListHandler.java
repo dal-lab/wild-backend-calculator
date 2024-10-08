@@ -12,9 +12,13 @@ import java.util.List;
 @Component
 public class CalculationResourceListHandler extends ResourceMethodHandler {
 
-    private final Calculator calculator = new Calculator();
+    private final Calculator calculator;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    public CalculationResourceListHandler(Calculator calculator) {
+        this.calculator = calculator;
+    }
 
     @Override
     public String key() {

@@ -2,11 +2,13 @@ package com.example.demo.application;
 
 import com.example.demo.infrastructure.Calculation;
 import com.example.demo.infrastructure.CalculationRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class Calculator {
     private final CalculationRepository calculationRepository =
             CalculationRepository.getInstance();
