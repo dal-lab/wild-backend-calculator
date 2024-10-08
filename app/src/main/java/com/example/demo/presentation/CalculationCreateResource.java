@@ -8,12 +8,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CalculationCreateResource extends ResourceMethodHandler {
-    public final static String KEY = "POST /calculations";
 
     private final Calculator calculator = new Calculator();
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    @Override
+    public String key() {
+        return "POST /calculations";
+    }
+
+    @Override
     public String handle(String content) throws JsonProcessingException {
         CalculationRequestDto requestDto =
                 objectMapper.readValue(content, CalculationRequestDto.class);
