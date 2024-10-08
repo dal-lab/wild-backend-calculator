@@ -3,7 +3,7 @@ package com.example.demo.presentation;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HomeGetResource extends ResourceMethodHandler {
+public class HomeResourceGetHandler extends ResourceMethodHandler {
 
     @Override
     public String key() {

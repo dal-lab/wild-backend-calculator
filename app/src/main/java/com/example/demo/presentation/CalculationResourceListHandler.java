@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class CalculationListResource extends ResourceMethodHandler {
+public class CalculationResourceListHandler extends ResourceMethodHandler {
 
     private final Calculator calculator = new Calculator();
 

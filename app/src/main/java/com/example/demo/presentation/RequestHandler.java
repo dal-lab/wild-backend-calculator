@@ -16,13 +16,13 @@ public class RequestHandler implements HttpHandler {
     private final Map<String, ResourceMethodHandler> handlers = new HashMap<>();
 
     public RequestHandler(
-            HomeGetResource homeGetResource,
-            CalculationCreateResource calculationCreateResource,
-            CalculationListResource calculationListResource
+            HomeResourceGetHandler homeResourceGetHandler,
+            CalculationResourceCreateHandler calculationResourceCreateHandler,
+            CalculationResourceListHandler calculationResourceListHandler
     ) {
-        addResourceMethodHandler(homeGetResource);
-        addResourceMethodHandler(calculationCreateResource);
-        addResourceMethodHandler(calculationListResource);
+        addResourceMethodHandler(homeResourceGetHandler);
+        addResourceMethodHandler(calculationResourceCreateHandler);
+        addResourceMethodHandler(calculationResourceListHandler);
     }
 
     private void addResourceMethodHandler(ResourceMethodHandler handler) {
