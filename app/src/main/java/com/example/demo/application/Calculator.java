@@ -11,10 +11,12 @@ import java.util.Map;
 @Component
 public class Calculator {
     private final Map<String, Operator> operators = new HashMap<>();
-    //    private final Map<String,Operator> operators = new HashMap<>();
-    private final CalculationRepository calculationRepository = CalculationRepository.getInstance();
+    private final CalculationRepository calculationRepository;
 
-    public Calculator() {
+    public Calculator(
+            CalculationRepository calculationRepository
+    ) {
+        this.calculationRepository = calculationRepository;
         operators.put("+", new OperatorPlus());
         operators.put("/", new OperatorDivide());
         operators.put("-", new OperatorMinus());
