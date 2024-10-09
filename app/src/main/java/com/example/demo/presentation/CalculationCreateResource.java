@@ -7,9 +7,10 @@ import com.example.demo.presentation.dto.CalculationRequestDto;
 import com.example.demo.presentation.dto.CalculationResponseDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CalculationCreateResource extends ResourceMethodHandler {
-    public final static String KEY = "POST /calculations";
     public final Calculator calculator = new Calculator();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -30,5 +31,9 @@ public class CalculationCreateResource extends ResourceMethodHandler {
         } catch (ArithmeticException e) {
             return "계산 오류: " + e.getMessage();
         }
+    }
+
+    public String getKey() {
+        return "POST /calculations";
     }
 }
