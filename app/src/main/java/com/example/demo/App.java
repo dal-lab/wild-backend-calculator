@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.presentation.RequestHandler;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -25,8 +26,8 @@ public class App {
         server.run();
     }
 
-//    @Bean
-//    public Server server() {
-//        return new Server(new RequestHandler());
-//    }
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
 }
