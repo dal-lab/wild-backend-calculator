@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CalculationCreateResource extends ResourceMethodHandler {
+public class CalculationCreateHandler extends ResourceMethodHandler {
     public final Calculator calculator = new Calculator();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
