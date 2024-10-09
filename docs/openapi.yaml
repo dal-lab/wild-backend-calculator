@@ -1,0 +1,86 @@
+openapi: 3.1.0
+info:
+    title: 간단한 계산기
+    description: 이 프로젝트는 Layered Architecture를 기반으로 한 간단한 사칙연산 계산기 API 를 개발하는 과제입니다.
+    version: 1.0.0
+servers:
+    -   url: http://localhost:8080
+paths:
+    /calculations:
+        post:
+            summary: 계산기 API
+            description: 두 수를 입력받아 더하기, 빼기, 곱하기, 나누기 연산을 ��행합니다.
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                number1:
+                                    type: number
+                                    description: 첫 번째 숫자
+                                number2:
+                                    type: number
+                                    description: 두 번째 숫자
+                                operator:
+                                    type: string
+                                    description: 연산자
+                                    enum: [ '+', '-', '*', '/' ]
+            responses:
+                '200':
+                    description: 성공
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    number1:
+                                        type: number
+                                        description: 첫 번째 숫자
+                                    number2:
+                                        type: number
+                                        description: 두 번째 숫자
+                                    operator:
+                                        type: string
+                                        description: 연산자
+                                        enum: [ '+', '-', '*', '/' ]
+                                    result:
+                                        type: number
+                                        description: 연산 결과
+                '500':
+                    description: 서버 오류
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: string
+                                        description: 에러 메시지
+        get:
+            summary: 계산 히스토리
+            description: 계산기 API의 히스토리를 조회합니다.
+            responses:
+                '200':
+                    description: 성공
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                    properties:
+                                        number1:
+                                            type: number
+                                            description: 첫 번째 숫자
+                                        number2:
+                                            type: number
+                                            description: 두 번째 숫자
+                                        operator:
+                                            type: string
+                                            description: 연산자
+                                            enum: [ '+', '-', '*', '/' ]
+                                        result:
+                                            type: number
+                                            description: 연산 결과
