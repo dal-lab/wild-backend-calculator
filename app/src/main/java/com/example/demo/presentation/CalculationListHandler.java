@@ -13,8 +13,13 @@ import java.util.stream.Collectors;
 
 @Component
 public class CalculationListHandler extends ResourceMethodHandler {
-    private final Calculator calculator = new Calculator();
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final Calculator calculator;
+    private final ObjectMapper objectMapper;
+
+    CalculationListHandler(Calculator calculator, ObjectMapper objectMapper) {
+        this.calculator = calculator;
+        this.objectMapper = objectMapper;
+    }
 
     public String handle(String content) throws JsonProcessingException {
         List<Calculation> calculations = calculator.getCalculations();
