@@ -12,9 +12,11 @@ import java.net.URI;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ComponentScan
 public class App {
     public static void main(String[] args) throws IOException {
         // ApplicationContext 생성 방식중에서 Annotation 방식을 사용하여 생성
@@ -23,8 +25,8 @@ public class App {
         server.run();
     }
 
-    @Bean
-    public Server server() {
-        return new Server(new RequestHandler());
-    }
+//    @Bean
+//    public Server server() {
+//        return new Server(new RequestHandler());
+//    }
 }

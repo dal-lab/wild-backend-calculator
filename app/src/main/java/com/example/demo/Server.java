@@ -3,11 +3,12 @@ package com.example.demo;
 import com.example.demo.presentation.RequestHandler;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-
+@Component
 public class Server {
     private final HttpHandler requestHandler;
 
