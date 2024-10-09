@@ -2,6 +2,7 @@ package com.example.demo.presentation;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class RequestHandler implements HttpHandler {
     private final Map<String, ResourceMethodHandler> methodHandlers = new HashMap<>();
 
