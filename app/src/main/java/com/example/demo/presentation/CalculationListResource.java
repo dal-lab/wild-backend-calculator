@@ -6,13 +6,13 @@ import com.example.demo.presentation.dto.CalculationListResponseDto;
 import com.example.demo.presentation.dto.CalculationResponseDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class CalculationListResource extends ResourceMethodHandler {
-    public final static String KEY = "GET /calculations";
-
     private final Calculator calculator = new Calculator();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -28,6 +28,10 @@ public class CalculationListResource extends ResourceMethodHandler {
                         )
                 ).collect(Collectors.toList()))
         );
+    }
+
+    public String getKey() {
+        return "GET /calculations";
     }
 
 }

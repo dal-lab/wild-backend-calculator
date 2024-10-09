@@ -17,10 +17,16 @@ import java.util.Map;
 public class RequestHandler implements HttpHandler {
     private final Map<String, ResourceMethodHandler> methodHandlers = new HashMap<>();
 
-    public RequestHandler() {
-        methodHandlers.put(CalculationCreateResource.KEY, new CalculationCreateResource());
-        methodHandlers.put(CalculationListResource.KEY, new CalculationListResource());
+    public RequestHandler(
+            CalculationCreateResource calculationCreateResource,
+            CalculationListResource calculationListResource
+    ) {
+        addResourceMethodHandler(calculationCreateResource);
+        addResourceMethodHandler(calculationListResource);
+    }
 
+    private void addResourceMethodHandler(ResourceMethodHandler handler) {
+        methodHandlers.put(handler.getKey(), handler);
     }
 
     @Override
