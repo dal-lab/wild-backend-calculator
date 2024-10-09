@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class CalculationListResource extends ResourceMethodHandler {
+public class CalculationListHandler extends ResourceMethodHandler {
     private final Calculator calculator = new Calculator();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
