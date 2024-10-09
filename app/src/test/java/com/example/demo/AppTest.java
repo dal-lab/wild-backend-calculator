@@ -2,7 +2,8 @@ package com.example.demo;
 
 import com.example.demo.application.Calculator;
 import com.example.demo.infrastructure.Calculation;
-import com.example.demo.infrastructure.CalculationRepository;
+import com.example.demo.infrastructure.FakeCalculationRepository;
+import com.example.demo.infrastructure.InMemoryCalculationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,12 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AppTest {
-    CalculationRepository calculationRepository;
+    FakeCalculationRepository calculationRepository;
     Calculator calculator;
 
     @BeforeEach
     void setUp(){
-        calculationRepository = new CalculationRepository();
+        calculationRepository = new FakeCalculationRepository();
         calculator = new Calculator(calculationRepository);
     }
     @Test
