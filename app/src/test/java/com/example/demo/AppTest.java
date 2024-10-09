@@ -1,13 +1,41 @@
 package com.example.demo;
 
+import com.example.demo.application.Calculator;
+import com.example.demo.infrastructure.Calculation;
+import com.example.demo.infrastructure.CalculationRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AppTest {
+    CalculationRepository calculationRepository;
+    Calculator calculator;
+
+    @BeforeEach
+    void setUp(){
+        calculationRepository = new CalculationRepository();
+        calculator = new Calculator(calculationRepository);
+    }
     @Test
-    void creation() {
-        App app = new App();
-        assertNotNull(app);
+    void plus() {
+        Calculation calculation = calculator.calculate(2,1,"+");
+        assertThat(calculation.getResult()).isEqualTo(3);
+    }
+    @Test
+    void minus() {
+        Calculation calculation = calculator.calculate(2,1,"-");
+        assertThat(calculation.getResult()).isEqualTo(1);
+    }
+    @Test
+    void divide() {
+        Calculation calculation = calculator.calculate(2,1,"*");
+        assertThat(calculation.getResult()).isEqualTo(2);
+    }
+    @Test
+    void multiply() {
+        Calculation calculation = calculator.calculate(2,1,"/");
+        assertThat(calculation.getResult()).isEqualTo(2);
     }
 }
