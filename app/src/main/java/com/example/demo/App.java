@@ -16,17 +16,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class App {
     public static void main(String[] args) throws IOException {
-
         // ApplicationContext 생성 방식중에서 Annotation 방식을 사용하여 생성
         ApplicationContext context = new AnnotationConfigApplicationContext(App.class);
-        App app = context.getBean(App.class);
-        app.run();
-    }
-
-    private void run() throws IOException {
-        HttpServer httpServer = HttpServer.create(new InetSocketAddress(8080), 0);
-        httpServer.createContext("/", new RequestHandler());
-        httpServer.start();
-        System.out.println("Server started. Listening on " + httpServer.getAddress());
+        Server server = context.getBean(Server.class);
+        server.run();
     }
 }
