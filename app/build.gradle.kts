@@ -9,8 +9,16 @@ repositories {
 }
 
 dependencies {
+    //Spring
+    implementation("org.springframework:spring-core:6.1.13")
+    implementation("org.springframework:spring-context:6.1.13")
+
+    // Use the Kotlin standard library. JSON serialization is included in the standard library.
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0")
+
     // Use JUnit Jupiter for testing.
-    testImplementation(libs.junit.jupiter)
+    testImplementation("org.assertj:assertj-core:3.26.3")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.3")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
