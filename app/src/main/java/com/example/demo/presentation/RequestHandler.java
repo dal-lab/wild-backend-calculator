@@ -18,8 +18,8 @@ public class RequestHandler implements HttpHandler {
     private final Map<String, ResourceMethodHandler> methodHandlers = new HashMap<>();
 
     public RequestHandler(
-            CalculationCreateResource calculationCreateResource,
-            CalculationListResource calculationListResource
+            CalculationCreateHandler calculationCreateResource,
+            CalculationListHandler calculationListResource
     ) {
         addResourceMethodHandler(calculationCreateResource);
         addResourceMethodHandler(calculationListResource);
