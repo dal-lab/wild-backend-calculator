@@ -13,6 +13,7 @@ dependencies {
     implementation("org.springframework:spring-context:6.1.13")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0")
     // Use JUnit Jupiter for testing.
+    testImplementation("org.assertj:assertj-core:3.26.3")
     testImplementation(libs.junit.jupiter)
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
