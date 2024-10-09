@@ -9,13 +9,15 @@ repositories {
 }
 
 dependencies {
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0")
 
-    // Use JUnit Jupiter for testing.
-    testImplementation("org.assertj:assertj-core:3.26.3")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.3")
+    implementation("org.springframework.boot:spring-boot-starter-web:3.3.4")
+    //  implementation("org.springframework:spring-core:6.1.13")
+    //  implementation("org.springframework:spring-context:6.1.13")
+    //  implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0")
 
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    // for testing.
+    testImplementation("org.springframework.boot:spring-boot-starter-test:3.3.4")
+    //  testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.2")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
