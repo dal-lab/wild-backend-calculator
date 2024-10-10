@@ -5,8 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 class CalculatorTest {
@@ -47,4 +49,11 @@ class CalculatorTest {
         verify(calculationRepository).add(any(Calculation.class));
     }
     
+    @Test
+    void divideZero() {
+        assertThatThrownBy(() -> {
+            calculator.calculate(10, 0, "/");
+        });
+        verify(calculationRepository, never()).add(any());
+    }
 }
