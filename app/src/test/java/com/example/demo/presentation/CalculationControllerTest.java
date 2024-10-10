@@ -10,9 +10,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -32,8 +35,16 @@ class CalculationControllerTest {
 
     @Test
     void list() throws Exception {
+        List<Calculation> calculations = List.of(
+                new Calculation("+", 10, 2, 12));
+        when(calculator.getCalculationList()).thenReturn(calculations);
+
         mockMvc.perform(get("/calculations"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().string(
+                        containsString("12")
+                ));
+        verify(calculator).getCalculationList();
     }
 
     @Test
