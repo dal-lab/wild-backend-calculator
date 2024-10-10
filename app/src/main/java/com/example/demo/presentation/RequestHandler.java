@@ -8,7 +8,9 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.stereotype.Component;
 
+@Component
 public final class RequestHandler implements HttpHandler {
 
     private final Map<String, RequestMethodHandler> handlers = new HashMap<>();
