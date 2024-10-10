@@ -5,15 +5,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 class CalculatorTest {
     private Calculator calculator;
+    private CalculationRepository calculationRepository;
 
     @BeforeEach
     void setUp(){
-        FakeCalculationRepository calculationRepository = new FakeCalculationRepository();
+        CalculationRepository calculationRepository = mock(CalculationRepository.class);
         calculator = new Calculator(calculationRepository);
     }
+
     @Test
     void plus() {
         Calculation calculation = calculator.calculate(2,1,"+");
