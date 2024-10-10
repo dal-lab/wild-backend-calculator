@@ -4,12 +4,15 @@ import com.example.demo.infrastructure.Calculation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class CalculatorTest {
     private Calculator calculator;
@@ -55,5 +58,14 @@ class CalculatorTest {
             calculator.calculate(10, 0, "/");
         });
         verify(calculationRepository, never()).add(any());
+    }
+
+    @Test
+    void getCalculationList() {
+        List<Calculation> calculationss = List.of(
+                new Calculation("+", 1, 2, 3));
+        when(calculationRepository.getAll()).thenReturn(calculationss);
+        List<Calculation> calculations = calculator.getCalculationList();
+        assertThat(calculations).hasSize(1);
     }
 }
