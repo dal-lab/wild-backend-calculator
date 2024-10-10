@@ -3,19 +3,17 @@ package com.example.demo.application;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.infrastructure.Calculation;
-import com.example.demo.infrastructure.CalculationRepository;
-import com.example.demo.infrastructure.InMemoryCalculationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 
-    private CalculationRepository calculationRepository;
+    private FakeCalculationRepository calculationRepository;
     private Calculator calculator;
 
     @BeforeEach
     void setUp() {
-        calculationRepository = new InMemoryCalculationRepository();
+        calculationRepository = new FakeCalculationRepository();
         calculator = new Calculator(calculationRepository);
     }
 
@@ -24,6 +22,7 @@ class CalculatorTest {
         Calculation calculate = calculator.calculate(1, 2, "+");
 
         assertThat(calculate.getResult()).isEqualTo(3);
+        assertThat(calculationRepository.isAdded()).isTrue();
     }
 
     @Test
@@ -31,6 +30,7 @@ class CalculatorTest {
         Calculation calculate = calculator.calculate(3, 1, "-");
 
         assertThat(calculate.getResult()).isEqualTo(2);
+        assertThat(calculationRepository.isAdded()).isTrue();
     }
 
     @Test
@@ -38,6 +38,7 @@ class CalculatorTest {
         Calculation calculate = calculator.calculate(4, 2, "/");
 
         assertThat(calculate.getResult()).isEqualTo(2);
+        assertThat(calculationRepository.isAdded()).isTrue();
     }
 
     @Test
@@ -45,5 +46,6 @@ class CalculatorTest {
         Calculation calculate = calculator.calculate(3, 1, "*");
 
         assertThat(calculate.getResult()).isEqualTo(3);
+        assertThat(calculationRepository.isAdded()).isTrue();
     }
 }
