@@ -9,7 +9,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ListCalculationRequest implements RequestMethodHandler {
+public class CalculationListHandler implements RequestMethodHandler {
 
     private final Calculator calculator = new Calculator();
 

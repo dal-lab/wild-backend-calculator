@@ -3,7 +3,7 @@ package com.example.demo.presentation;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GetHomeRequest implements RequestMethodHandler {
+public class HomeGetHandler implements RequestMethodHandler {
 
     @Override
     public String handler(String content) {

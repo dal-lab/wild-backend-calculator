@@ -17,13 +17,13 @@ public final class RequestHandler implements HttpHandler {
     int HTTP_OK = 200;
 
     public RequestHandler(
-        GetHomeRequest homeRequest,
-        PostCalculationRequest postCalculationRequest,
-        ListCalculationRequest listCalculationRequest
+        HomeGetHandler homeRequest,
+        CalculationPostHandler calculationPostHandler,
+        CalculationListHandler calculationListHandler
     ) {
         addResourceMethodHandler(homeRequest);
-        addResourceMethodHandler(postCalculationRequest);
-        addResourceMethodHandler(listCalculationRequest);
+        addResourceMethodHandler(calculationPostHandler);
+        addResourceMethodHandler(calculationListHandler);
     }
 
     private void addResourceMethodHandler(RequestMethodHandler requestMethodHandler) {

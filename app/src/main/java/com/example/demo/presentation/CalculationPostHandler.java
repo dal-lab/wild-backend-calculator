@@ -9,7 +9,7 @@ import java.io.IOException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PostCalculationRequest implements RequestMethodHandler {
+public class CalculationPostHandler implements RequestMethodHandler {
 
     private final Calculator calculator = new Calculator();
 
