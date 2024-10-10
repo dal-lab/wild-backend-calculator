@@ -1,27 +1,19 @@
 package com.example.demo;
 
-import com.example.demo.presentation.RequestHandler;
-import com.sun.net.httpserver.HttpServer;
-
 import java.io.IOException;
-import java.net.InetSocketAddress;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
+@ComponentScan
 public class App {
 
-    private static final String HOST = "localhost";
-    private static final int PORT = 8080;
-
     public static void main(String[] args) throws IOException {
-        App app = new App();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                App.class);
+
+        Server app = context.getBean(Server.class);
         app.run();
-    }
-
-    public void run() throws IOException {
-        InetSocketAddress address = new InetSocketAddress(HOST, PORT);
-        HttpServer httpServer = HttpServer.create(address, 0);
-        httpServer.createContext("/", new RequestHandler());
-        httpServer.start();
-
-        System.out.println("Listening on http://" + HOST + ":" + PORT);
     }
 }

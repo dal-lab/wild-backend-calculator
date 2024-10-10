@@ -14,8 +14,12 @@ dependencies {
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.0.1")
+// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0")
+
+    // Use Spring framework
+    implementation("org.springframework:spring-core:6.1.13")
+    implementation("org.springframework:spring-context:6.1.13")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
