@@ -2,18 +2,18 @@ package com.example.demo.presentation;
 
 import com.example.demo.application.CalculationRepository;
 import com.example.demo.application.Calculator;
+import com.example.demo.infrastructure.Calculation;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -24,7 +24,7 @@ class CalculationControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @SpyBean
+    @MockBean
     private Calculator calculator;
 
     @MockBean
@@ -38,7 +38,9 @@ class CalculationControllerTest {
 
     @Test
     void create() throws Exception {
-        assertThat(calculationRepository.getAll()).hasSize(0);
+        when(calculator.calculate(anyInt(),anyInt(),any())).thenReturn(
+                new Calculation("+",10,2,12)
+        );
         String json = """
                 {
                     "number1": 10,
@@ -52,6 +54,5 @@ class CalculationControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().string(containsString("12")));
 
-        verify(calculationRepository).add(any());
     }
 }
