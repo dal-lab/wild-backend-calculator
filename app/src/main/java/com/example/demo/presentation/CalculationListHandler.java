@@ -11,9 +11,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class CalculationListHandler implements RequestMethodHandler {
 
-    private final Calculator calculator = new Calculator();
+    private final Calculator calculator;
+    private final ObjectMapper objectMapper;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    public CalculationListHandler(Calculator calculator,
+            ObjectMapper objectMapper) {
+        this.calculator = calculator;
+        this.objectMapper = objectMapper;
+    }
 
     @Override
     public String handler(String content) throws IOException {
