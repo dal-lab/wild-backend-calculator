@@ -62,10 +62,9 @@ class CalculatorTest {
 
     @Test
     void getCalculationList() {
-        List<Calculation> calculationss = List.of(
+        List<Calculation> calculations = List.of(
                 new Calculation("+", 1, 2, 3));
-        when(calculationRepository.getAll()).thenReturn(calculationss);
-        List<Calculation> calculations = calculator.getCalculationList();
+        when(calculationRepository.getAll()).thenReturn(calculations);
         assertThat(calculations).hasSize(1);
     }
 }
