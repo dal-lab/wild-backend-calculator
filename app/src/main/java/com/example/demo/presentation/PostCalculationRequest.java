@@ -6,7 +6,9 @@ import com.example.demo.presentation.dto.CalculationRequestDto;
 import com.example.demo.presentation.dto.CalculationResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PostCalculationRequest implements RequestMethodHandler {
 
     private final Calculator calculator = new Calculator();
@@ -30,5 +32,10 @@ public class PostCalculationRequest implements RequestMethodHandler {
                         calculate.getResult()
                 )
         );
+    }
+
+    @Override
+    public String key() {
+        return "POST /calculations";
     }
 }

@@ -16,14 +16,18 @@ public final class RequestHandler implements HttpHandler {
     private final Map<String, RequestMethodHandler> handlers = new HashMap<>();
     int HTTP_OK = 200;
 
-    public RequestHandler() {
-        String KEY = "GET /";
-        String KEY1 = "POST /calculations";
-        String KEY2 = "GET /calculations";
+    public RequestHandler(
+        GetHomeRequest homeRequest,
+        PostCalculationRequest postCalculationRequest,
+        ListCalculationRequest listCalculationRequest
+    ) {
+        addResourceMethodHandler(homeRequest);
+        addResourceMethodHandler(postCalculationRequest);
+        addResourceMethodHandler(listCalculationRequest);
+    }
 
-        handlers.put(KEY, new GetHomeRequest());
-        handlers.put(KEY1, new PostCalculationRequest());
-        handlers.put(KEY2, new ListCalculationRequest());
+    private void addResourceMethodHandler(RequestMethodHandler requestMethodHandler) {
+        handlers.put(requestMethodHandler.key(), requestMethodHandler);
     }
 
     @Override
@@ -32,7 +36,7 @@ public final class RequestHandler implements HttpHandler {
 
         String requestKey = getRequestKey(exchange);
         String responseContent = getRequestHandler(requestContent,
-                requestKey);
+            requestKey);
 
         sendResponse(exchange, responseContent);
     }
@@ -46,8 +50,8 @@ public final class RequestHandler implements HttpHandler {
     }
 
     private String getRequestHandler(
-            String requestContent,
-            String requestKey) throws IOException {
+        String requestContent,
+        String requestKey) throws IOException {
 
         RequestMethodHandler requestMethodHandler = handlers.get(requestKey);
         if (requestMethodHandler == null) {
@@ -58,7 +62,7 @@ public final class RequestHandler implements HttpHandler {
     }
 
     private void sendResponse(HttpExchange exchange, String responseContent)
-            throws IOException {
+        throws IOException {
         byte[] bytes = responseContent.getBytes();
 
         exchange.sendResponseHeaders(HTTP_OK, bytes.length);

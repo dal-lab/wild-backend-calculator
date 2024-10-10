@@ -6,7 +6,9 @@ import com.example.demo.presentation.dto.CalculationListResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ListCalculationRequest implements RequestMethodHandler {
 
     private final Calculator calculator = new Calculator();
@@ -20,5 +22,10 @@ public class ListCalculationRequest implements RequestMethodHandler {
         return objectMapper.writeValueAsString(
                 CalculationListResponseDto.of(calculationList)
         );
+    }
+
+    @Override
+    public String key() {
+        return "GET /calculations";
     }
 }
