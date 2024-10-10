@@ -48,7 +48,7 @@ class CalculatorTest {
         assertThat(calculation.getResult()).isEqualTo(2);
         verify(calculationRepository).add(any(Calculation.class));
     }
-    
+
     @Test
     void divideZero() {
         assertThatThrownBy(() -> {
