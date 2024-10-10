@@ -1,5 +1,4 @@
-package com.example.demo;
-import com.example.demo.application.Calculator;
+package com.example.demo.application;
 import com.example.demo.infrastructure.Calculation;
 import com.example.demo.infrastructure.FakeCalculationRepository;
 import org.junit.jupiter.api.BeforeEach;
