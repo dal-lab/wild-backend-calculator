@@ -17,6 +17,12 @@ dependencies {
     // Use Spring framework
     implementation("org.springframework:spring-core:6.1.13")
     implementation("org.springframework:spring-context:6.1.13")
+
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.14.0")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-parameter-names:2.14.0")
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

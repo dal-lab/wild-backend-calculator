@@ -1,28 +1,20 @@
 package com.example.demo;
 
+import java.io.IOException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ComponentScan
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ApplicationContext context =
                 new AnnotationConfigApplicationContext(App.class);
 
-        App app = context.getBean("myApp", App.class);
-
-        System.out.println(app.getGreeting());
-    }
-
-    @Bean
-    public App myApp() {
-        return new App();
-    }
-
-    public String getGreeting() {
-        return "Hello World!";
+        Server app = context.getBean(Server.class);
+        app.run();
     }
 }
