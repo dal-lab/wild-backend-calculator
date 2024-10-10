@@ -3,13 +3,14 @@ package com.example.demo.application;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.infrastructure.Calculation;
+import com.example.demo.infrastructure.CalculationRepository;
 import com.example.demo.infrastructure.InMemoryCalculationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 
-    private InMemoryCalculationRepository calculationRepository;
+    private CalculationRepository calculationRepository;
     private Calculator calculator;
 
     @BeforeEach

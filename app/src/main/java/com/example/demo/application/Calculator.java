@@ -1,7 +1,7 @@
 package com.example.demo.application;
 
 import com.example.demo.infrastructure.Calculation;
-import com.example.demo.infrastructure.InMemoryCalculationRepository;
+import com.example.demo.infrastructure.CalculationRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class Calculator {
 
-    private final InMemoryCalculationRepository calculationRepository;
+    private final CalculationRepository calculationRepository;
 
     private final Map<String, Operator> operators = new HashMap<>();
 
-    public Calculator(InMemoryCalculationRepository calculationRepository) {
+    public Calculator(CalculationRepository calculationRepository) {
         this.calculationRepository = calculationRepository;
 
         operators.put("+", new OperatorPlus());
