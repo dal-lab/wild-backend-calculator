@@ -1,7 +1,28 @@
 package com.example.demo;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
 public class App {
+
     public static void main(String[] args) {
-        System.out.println("Hello, world!");
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext(App.class);
+
+        App app = context.getBean("myApp", App.class);
+
+        System.out.println(app.getGreeting());
+    }
+
+    @Bean
+    public App myApp() {
+        return new App();
+    }
+
+    public String getGreeting() {
+        return "Hello World!";
     }
 }
