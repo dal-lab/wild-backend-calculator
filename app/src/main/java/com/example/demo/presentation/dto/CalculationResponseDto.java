@@ -1,7 +1,7 @@
 package com.example.demo.presentation.dto;
 
 
-public record CalculationResponseDto <operator>(int number1, int number2, String operator, int result){
+public record CalculationResponseDto(int number1, int number2, String operator, int result) {
     public int getNumber2() {
         return number2;
     }
