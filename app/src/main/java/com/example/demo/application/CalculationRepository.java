@@ -8,4 +8,6 @@ public interface CalculationRepository {
     void add(Calculation calculation);
 
     ArrayList<Calculation> getCalculations();
+
+    Object getAll();
 }

@@ -18,4 +18,9 @@ public class InMemoryCalculationRepository implements CalculationRepository {
     public ArrayList<Calculation> getCalculations() {
         return calculations;
     }
+
+    @Override
+    public Object getAll() {
+        return calculations;
+    }
 }
