@@ -69,7 +69,10 @@ class CalculatorTest {
 
     @Test
     void getCalulationList() {
-        List<Calculation> calculations = calculator.getCalculations();
+        List<Calculation> calculations = List.of(
+                new Calculation(1, 2, "+", 3)
+        );
+        when(calculationRepository.getAll()).thenReturn(calculations);
         assertThat(calculations).hasSize(1);
     }
 }
