@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -12,9 +13,14 @@ public class App {
     }
 
     private void run() throws IOException {
-        InetSocketAddress address = new InetSocketAddress("localhost",8080);
-        HttpServer httpServer = HttpServer.create(address, 0);
+        HttpHandler requestHandler = new RequestHandler();
+
+        InetSocketAddress address = new InetSocketAddress("localhost", 8080);
+        HttpServer httpServer = HttpServer.create(address, 0) ;
+        httpServer.createContext("/", requestHandler);
         httpServer.start();
-        httpServer.createContext()
+
+        System.out.println("Listening on http://localhost:8080");
+    }
     }
 }
