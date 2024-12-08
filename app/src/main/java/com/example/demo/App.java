@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.presentation.RequestHandler;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
@@ -21,6 +22,5 @@ public class App {
         httpServer.start();
 
         System.out.println("Listening on http://localhost:8080");
-    }
     }
 }
