@@ -1,9 +1,15 @@
 package com.example.demo.application;
 
+import com.example.demo.infrastructure.Calculation;
+import com.example.demo.infrastructure.CalculationRepository;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Calculator {
+
+    private final CalculationRepository calculationRespository
+            = new CalculationRepository();
 
     private final Map<String, Operator> operators = new HashMap<>();
 
@@ -14,8 +20,16 @@ public class Calculator {
         operators.put("/", new OperatorDivide());
     }
 
-    public int calculate(int number1, int number2, String operatorSymbol) {
+    public Calculation calculate(int number1, int number2, String operatorSymbol) {
         Operator operator = operators.get(operatorSymbol);
-        return operator.calculate(number1, number2);
+        int result = operator.calculate(number1, number2);
+
+        Calculation calculation = new Calculation(
+                operatorSymbol, number1, number2, result
+        );
+
+        calculationRespository.add(calculation);
+
+        return calculation;
     }
 }

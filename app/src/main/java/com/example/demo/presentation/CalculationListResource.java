@@ -7,9 +7,9 @@ import com.example.demo.infrastructure.Calculation;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class CalculationCreateResource extends ResourceMethodHandler {
+public class CalculationListResource extends ResourceMethodHandler {
 
-    public final static String KEY = "POST /calculations";
+    public final static String KEY = "GET /calculations";
 
     private final Calculator calculator = new Calculator();
 
