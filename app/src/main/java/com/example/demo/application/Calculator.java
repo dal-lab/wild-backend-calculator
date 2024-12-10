@@ -4,6 +4,7 @@ import com.example.demo.infrastructure.Calculation;
 import com.example.demo.infrastructure.CalculationRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Calculator {
@@ -31,5 +32,9 @@ public class Calculator {
         calculationRespository.add(calculation);
 
         return calculation;
+    }
+
+    public List<Calculation> getCalculations() {
+        return null;
     }
 }

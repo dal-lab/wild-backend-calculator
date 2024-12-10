@@ -7,7 +7,9 @@ import com.example.demo.infrastructure.Calculation;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class CalculationListResource extends ResourceMethodHandler {
+import java.util.List;
+
+public class CalculationListHandler extends ResourceMethodHandler {
 
     public final static String KEY = "GET /calculations";
 
@@ -15,8 +17,10 @@ public class CalculationListResource extends ResourceMethodHandler {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-
+    @Override
     public String handle(String content) throws JsonProcessingException {
+
+        List<Calculation> calculations = calculator.getCalculations();
 
         CalculationRequestDto requestDto =
                 objectMapper.readValue(content, CalculationRequestDto.class);
