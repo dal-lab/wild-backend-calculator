@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class Calculator {
 
-    private final CalculationRepository calculationRespository
-            = new CalculationRepository();
+    private final CalculationRepository calculationRepository
+            = CalculationRepository.getInstance();
 
     private final Map<String, Operator> operators = new HashMap<>();
 
@@ -29,12 +29,12 @@ public class Calculator {
                 operatorSymbol, number1, number2, result
         );
 
-        calculationRespository.add(calculation);
+        calculationRepository.add(calculation);
 
         return calculation;
     }
 
     public List<Calculation> getCalculations() {
-        return null;
+        return calculationRepository.getCalculations();
     }
 }

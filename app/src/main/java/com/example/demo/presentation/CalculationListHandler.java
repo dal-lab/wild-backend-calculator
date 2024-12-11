@@ -1,6 +1,7 @@
 package com.example.demo.presentation;
 
 import com.example.demo.application.Calculator;
+import com.example.demo.dto.CalculationListResponseDto;
 import com.example.demo.dto.CalculationRequestDto;
 import com.example.demo.dto.CalculationResponseDto;
 import com.example.demo.infrastructure.Calculation;
@@ -22,20 +23,18 @@ public class CalculationListHandler extends ResourceMethodHandler {
 
         List<Calculation> calculations = calculator.getCalculations();
 
-        CalculationRequestDto requestDto =
-                objectMapper.readValue(content, CalculationRequestDto.class);
-
-        Calculation calculation = calculator.calculate(
-                requestDto.getNumber1(),
-                requestDto.getNumber2(),
-                requestDto.getOperator());
+        System.out.println(calculations);
 
         return objectMapper.writeValueAsString(
-                new CalculationResponseDto(
-                        calculation.getNumber1(),
-                        calculation.getNumber2(),
-                        calculation.getOperator(),
-                        calculation.getResult()
+                new CalculationListResponseDto(
+                        calculations.stream()
+                                .map(calculation -> new CalculationResponseDto(
+                                        calculation.getNumber1(),
+                                        calculation.getNumber2(),
+                                        calculation.getOperator(),
+                                        calculation.getResult()
+                                ))
+                                .toList()
                 ));
 
     }
