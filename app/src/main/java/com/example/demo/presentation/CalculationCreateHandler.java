@@ -29,7 +29,7 @@ public class CalculationCreateHandler extends ResourceMethodHandler {
 
         CalculationRequestDto requestDto = objectMapper.readValue(content, CalculationRequestDto.class);
 
-        Calculation calculation = calculator.caculate(requestDto.getNumber1(), requestDto.getNumber2(), requestDto.getOperator());
+        Calculation calculation = calculator.calculate(requestDto.getNumber1(), requestDto.getNumber2(), requestDto.getOperator());
 
         return objectMapper.writeValueAsString(new CalculationResposeDto(
                 calculation.getNumber1(),

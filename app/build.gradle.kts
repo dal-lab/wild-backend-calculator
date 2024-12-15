@@ -19,6 +19,9 @@ dependencies {
 
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
+    // https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testImplementation("org.assertj:assertj-core:3.26.3")
+
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
