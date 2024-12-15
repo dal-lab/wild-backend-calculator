@@ -9,6 +9,12 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/org.springframework/spring-context
+    implementation("org.springframework:spring-context:6.1.13")
+
+    // https://mvnrepository.com/artifact/org.springframework/spring-core
+    implementation("org.springframework:spring-core:6.1.13")
+
     implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0")
 
     // Use JUnit Jupiter for testing.

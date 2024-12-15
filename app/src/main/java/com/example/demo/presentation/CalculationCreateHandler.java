@@ -1,18 +1,28 @@
 package com.example.demo.presentation;
 
 import com.example.demo.application.Calculator;
-import com.example.demo.dto.CalculationRequestDto;
-import com.example.demo.dto.CalculationResposeDto;
+import com.example.demo.presentation.dto.CalculationRequestDto;
+import com.example.demo.presentation.dto.CalculationResposeDto;
 import com.example.demo.infrastructure.Calculation;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
-public class CalculationCreateResource extends ResourceMethodHandler {
-    public final static String KEY = "POST /calculations";
+@Component
+public class CalculationCreateHandler extends ResourceMethodHandler {
+    private final Calculator calculator;
 
-    private final Calculator calculator = new Calculator();
+    private final ObjectMapper objectMapper;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    public CalculationCreateHandler(Calculator calculator, ObjectMapper objectMapper) {
+        this.calculator = calculator;
+        this.objectMapper = objectMapper;
+    }
+
+    @Override
+    public String key() {
+        return "POST /calculations";
+    }
 
     @Override
     public String handle(String content) throws JsonProcessingException {

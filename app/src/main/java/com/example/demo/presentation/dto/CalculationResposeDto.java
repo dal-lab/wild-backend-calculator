@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.presentation.dto;
 
 public class CalculationResposeDto {
     private final int number1;

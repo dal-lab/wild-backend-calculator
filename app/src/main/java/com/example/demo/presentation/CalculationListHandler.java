@@ -1,19 +1,29 @@
 package com.example.demo.presentation;
 
 import com.example.demo.application.Calculator;
-import com.example.demo.dto.CalculationListResposeDto;
+import com.example.demo.presentation.dto.CalculationListResposeDto;
 import com.example.demo.infrastructure.Calculation;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class CalculationListResource extends ResourceMethodHandler {
-    public final static String KEY = "GET /calculations";
+@Component
+public class CalculationListHandler extends ResourceMethodHandler {
+    private final Calculator calculator;
 
-    private final Calculator calculator = new Calculator();
+    private final ObjectMapper objectMapper;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    public CalculationListHandler(Calculator calculator, ObjectMapper objectMapper) {
+        this.calculator = calculator;
+        this.objectMapper = objectMapper;
+    }
+
+    @Override
+    public String key() {
+        return "GET /calculations";
+    }
 
     @Override
     public String handle(String content) throws JsonProcessingException {
