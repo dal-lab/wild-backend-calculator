@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CalculationListResposeDto {
-    private final List<CalculationResposeDto> calculations;
+    private final List<CalculationResponseDto> calculations;
 
-    public CalculationListResposeDto(List<CalculationResposeDto> calculations) {
+    public CalculationListResposeDto(List<CalculationResponseDto> calculations) {
         this.calculations = calculations;
     }
 
@@ -16,7 +16,7 @@ public class CalculationListResposeDto {
         return new CalculationListResposeDto(
                 calculations.stream()
                         .map(calculation ->
-                                new CalculationResposeDto(
+                                new CalculationResponseDto(
                                         calculation.getNumber1(),
                                         calculation.getNumber2(),
                                         calculation.getOperator(),
@@ -26,7 +26,7 @@ public class CalculationListResposeDto {
         );
     }
 
-    public List<CalculationResposeDto> getCalculations() {
+    public List<CalculationResponseDto> getCalculations() {
         return calculations;
     }
 }
